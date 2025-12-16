@@ -1,0 +1,8 @@
+#create new venv
+python -m venv TajAIEngg-venv
+
+# activate 
+TajAIEngg-venv/scripts/activate
+
+#dependencies
+pip install -r requirements.txt
