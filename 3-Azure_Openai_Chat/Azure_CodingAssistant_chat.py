@@ -9,7 +9,6 @@ client = AzureOpenAI(
     api_version=os.getenv("AZURE_OPENAI_API_VERSION"),
 )
 
-models = client.models.list()
 
 messages = [
     {"role": "system", "content": "You are a coding mentor"},
