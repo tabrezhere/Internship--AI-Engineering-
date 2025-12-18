@@ -1,3 +1,6 @@
+# windows powershell with administrator
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+
 #create new venv
 python -m venv TajAIEngg-venv
 
