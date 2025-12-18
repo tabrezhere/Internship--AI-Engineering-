@@ -1,0 +1,3 @@
+I have FAST API http://127.0.0.1:8000/ask?q=question
+i want to create new chatbot like interface to send and receive info from rest api above all the response should bind to the div with nee line
+show the bot image for the response  with mobile response good UI professional bootstrap design
