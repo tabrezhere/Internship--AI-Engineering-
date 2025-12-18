@@ -1,15 +1,23 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from openai import AzureOpenAI
 from dotenv import load_dotenv
 import os
+
 load_dotenv(override=True)
 
-print("KEY:", os.getenv("AZURE_OPENAI_API_KEY"))
-print("ENDPOINT:", os.getenv("AZURE_OPENAI_ENDPOINT"))
-print("DEPLOYMENT:", os.getenv("AZURE_OPENAI_DEPLOYMENT"))
-
-
 app = FastAPI()
+
+# ✅ ADD THIS BLOCK
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],   # for development only
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 client = AzureOpenAI(
     api_key=os.getenv("AZURE_OPENAI_API_KEY"),
     api_version=os.getenv("AZURE_OPENAI_API_VERSION"),
