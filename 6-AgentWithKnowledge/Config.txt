@@ -1,0 +1,1 @@
+pip install -r requirements.txt azure-ai-projects azure-ai-agents
