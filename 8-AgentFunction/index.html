@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Support Ticket Portal</title>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+
+  <style>
+    body {
+      background: linear-gradient(135deg,#141e30,#243b55);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.25);
+    }
+
+    .glow-btn:hover {
+      box-shadow: 0 0 12px #0df2c9;
+    }
+
+    .loader {
+      display: none;
+    }
+
+    pre {
+      background:#111;
+      padding:10px;
+      border-radius:10px;
+      color:#0df2c9;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+
+      <div class="card p-4">
+
+        <h3 class="text-center mb-2">🎫 Support Ticket Assistant</h3>
+        <p class="text-center text-muted">
+          Enter your email & describe your issue
+        </p>
+
+        <hr>
+
+        <!-- Email -->
+        <label class="mt-2">Email Address</label>
+        <input id="emailInput" class="form-control" placeholder="you@example.com">
+
+        <!-- Issue -->
+        <label class="mt-3">Describe Your Issue</label>
+        <textarea id="issueInput" class="form-control" rows="4"
+                  placeholder="Explain your problem..."></textarea>
+
+        <!-- Status -->
+        <div id="statusBox" class="mt-3"></div>
+
+        <!-- Loader -->
+        <div id="loader" class="loader mt-2 text-center">
+          <div class="spinner-border text-info"></div>
+          <p class="mt-2">Creating ticket...</p>
+        </div>
+
+        <!-- Button -->
+        <button onclick="createTicket()"
+                class="btn btn-info w-100 mt-3 glow-btn">
+          Submit Ticket
+        </button>
+
+        <!-- Result -->
+        <div id="resultBox" class="mt-4"></div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+async function createTicket() {
+
+  const email = document.getElementById("emailInput").value.trim();
+  const issue = document.getElementById("issueInput").value.trim();
+  const statusBox = document.getElementById("statusBox");
+  const resultBox = document.getElementById("resultBox");
+  const loader = document.getElementById("loader");
+
+  statusBox.innerHTML = "";
+  resultBox.innerHTML = "";
+
+  // Basic validation
+  if (!email) {
+    statusBox.innerHTML = `<div class="alert alert-warning">Email is required.</div>`;
+    return;
+  }
+
+  if (!issue) {
+    statusBox.innerHTML = `<div class="alert alert-warning">Issue description is required.</div>`;
+    return;
+  }
+
+  loader.style.display = "block";
+
+  try {
+    const response = await fetch("http://127.0.0.1:8000/create-ticket", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({ email, issue })
+    });
+
+    const data = await response.json();
+    loader.style.display = "none";
+
+    if (!response.ok) {
+      statusBox.innerHTML =
+        `<div class="alert alert-danger">${data.detail}</div>`;
+      return;
+    }
+
+    const t = data.ticket;
+
+    resultBox.innerHTML = `
+      <div class="alert alert-success">
+        Ticket Created Successfully 🎉
+      </div>
+
+      <pre>
+Ticket Number : ${t.ticket_number}
+Email         : ${t.email}
+
+Saved File
+${t.file_path}
+
+Issue
+${t.issue}
+      </pre>
+    `;
+
+  } catch (err) {
+    loader.style.display = "none";
+    statusBox.innerHTML =
+      `<div class="alert alert-danger">
+        Failed to connect to API. Is FastAPI running?
+      </div>`;
+  }
+}
+</script>
+
+</body>
+</html>
