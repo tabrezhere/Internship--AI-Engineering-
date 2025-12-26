@@ -1,0 +1,5 @@
+id,usn,name,semester,sub1,sub2,sub3,sub4,total,result
+1,USN001,Asha,5,85,78,90,88,341,Pass
+2,USN002,Rahul,5,65,72,60,68,265,Pass
+3,USN003,Neha,5,45,50,48,40,183,Fail
+4,USN004,Arjun,5,90,92,88,91,361,Pass
