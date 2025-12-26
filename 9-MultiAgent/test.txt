@@ -1,0 +1,32 @@
+💰 Billing — Test Questions
+
+Why was ₹500 extra charged in my postpaid bill?
+
+I was charged for data even when mobile data was switched off.
+
+Why is my bill amount higher this month?
+
+🏦 Loan Eligibility — Test Questions
+
+Am I eligible for a personal loan?
+
+What is the minimum salary needed for loan approval?
+
+My loan application was rejected — why?
+
+Can I get a loan with low credit score?
+
+📶 SIM / Network — Test Questions
+
+My SIM is not working after recharge.
+
+I am not getting network in my area.
+
+My mobile data is very slow — what should I do?
+
+🎯 Ambiguous / Mixed Cases (Good for Testing Classifier)
+
+My number stopped working after paying the bill.
+
+I was charged extra after upgrading my plan.
+
