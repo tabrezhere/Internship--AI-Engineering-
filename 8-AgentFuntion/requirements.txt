@@ -1,6 +1,0 @@
-python-dotenv 
-openai
-azure-ai-agents
-azure-identity
-FastAPI
-uvicorn
