@@ -1,0 +1,5 @@
+fastapi
+uvicorn
+semantic-kernel
+pandas
+python-dotenv
